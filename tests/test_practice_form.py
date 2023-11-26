@@ -8,6 +8,7 @@ def test_registration():
     browser.element('#userEmail').should(be.blank).type('dobrovolskiy@qa.ru')
     browser.element('#gender-radio-1').should(have.value('Male')).with_(click_by_js=True).click()
     browser.element('#userNumber').should(be.blank).type('1002003040')
+
     browser.element('#dateOfBirthInput').click()
 
     browser.element('.react-datepicker__month-select').click()
@@ -19,8 +20,9 @@ def test_registration():
     browser.all('.react-datepicker__year-select>option').should(have.size(201))
     browser.all('.react-datepicker__year-select>option').first.should(have.exact_text('1900'))
     browser.all('.react-datepicker__year-select>option')[-1].should(have.exact_text('2100'))
-    browser.element('.react-datepicker__year-select>option[value="1990"').perform(command.js.scroll_into_view)
-    browser.element('.react-datepicker__year-select>option[value="1990"').click()
+    # browser.element('.react-datepicker__year-select>option[value="1990"').perform(command.js.scroll_into_view)
+    # browser.element('.react-datepicker__year-select>option[value="2100"').click()
+    browser.element('.react-datepicker__year-select').type("2100").press_enter()
 
     browser.element('#subjectsContainer').click().type('Math').press_enter()
     # browser.element('.subjects-auto-complete__control').click()
