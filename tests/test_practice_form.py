@@ -50,5 +50,7 @@ def test_registration():
     # browser.element('#react-select-3-input').type('NCR').press_enter()
     browser.element('#state').should(have.text('NCR'))
     browser.element('#city').click()
-    browser.element('#react-select-4-input').type('Delhi').press_enter()
+    browser.element('#react-select-4-option-0').click()
+    # browser.element('#react-select-4-input').type('Delhi').press_enter()
+    browser.element('#city').should(have.text('Delhi'))
     browser.element('#submit').perform(command.js.click)
