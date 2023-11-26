@@ -25,7 +25,6 @@ def test_registration():
     browser.element('.react-datepicker__year-select').type("2100").press_enter()
     # day
     browser.element('.react-datepicker__day--002').click()
-    browser.element('#dateOfBirthInput').should(have.value("02 Jan 2100"))
     # subjects
     browser.element('#subjectsContainer').click()
     browser.element('#subjectsInput').type('m')
@@ -36,7 +35,6 @@ def test_registration():
     browser.all('.subjects-auto-complete__option').should(have.exact_texts(
         'Chemistry', 'Computer Science', 'Commerce', 'Economics'))
     browser.all('.subjects-auto-complete__option').first.click()
-    browser.all('.subjects-auto-complete__multi-value').should(have.exact_texts('Maths', 'Chemistry'))
     # browser.element('#subjectsInput').type('Math').press_enter()
     # browser.element('#subjectsInput').type('English').press_enter()
 
@@ -51,9 +49,12 @@ def test_registration():
     browser.element('#state').click()
     browser.element('#react-select-3-option-0').click()
     # browser.element('#react-select-3-input').type('NCR').press_enter()
-    browser.element('#state').should(have.text('NCR'))
     browser.element('#city').click()
     browser.element('#react-select-4-option-0').click()
     # browser.element('#react-select-4-input').type('Delhi').press_enter()
-    browser.element('#city').should(have.text('Delhi'))
     browser.element('#submit').perform(command.js.click)
+    browser.all('.table>tbody>tr>td:last-child').should(have.exact_texts(
+        'Sergey Dobrovolskiy', 'dobrovolskiy@qa.ru', 'Male', '1002003040', '02 January,2100', 'Maths, Chemistry',
+        'Sports, Reading, Music', '', 'Test Address', 'NCR Delhi'))
+    browser.element('#closeLargeModal').perform(command.js.scroll_into_view)
+    browser.element('#closeLargeModal').click()
