@@ -34,7 +34,7 @@ def test_registration():
     browser.element('#subjectsInput').type('m')
     browser.all('.subjects-auto-complete__option').should(have.exact_texts('Chemistry', 'Computer Science', 'Commerce', 'Economics'))
     browser.all('.subjects-auto-complete__option').first.click()
-    browser.element('#subjectsContainer').should(have.exact_texts('Maths', 'Chemistry'))
+    browser.all('.subjects-auto-complete__multi-value').should(have.exact_texts('Maths', 'Chemistry'))
     # browser.element('#subjectsInput').type('Math').press_enter()
     # browser.element('#subjectsInput').type('English').press_enter()
 
@@ -44,6 +44,7 @@ def test_registration():
     browser.element('#hobbies-checkbox-3').with_(click_by_js=True).click()
     # current address
     browser.element('#currentAddress').should(be.blank).type('Test Address')
+    # state and city
     browser.element('#state').perform(command.js.scroll_into_view)
     browser.element('#state').click()
     browser.element('#react-select-3-option-0').click()
