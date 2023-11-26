@@ -29,10 +29,12 @@ def test_registration():
     # subjects
     browser.element('#subjectsContainer').click()
     browser.element('#subjectsInput').type('m')
-    browser.all('.subjects-auto-complete__option').should(have.exact_texts('Maths', 'Chemistry', 'Computer Science', 'Commerce', 'Economics'))
+    browser.all('.subjects-auto-complete__option').should(have.exact_texts(
+        'Maths', 'Chemistry', 'Computer Science', 'Commerce', 'Economics'))
     browser.all('.subjects-auto-complete__option').first.click()
     browser.element('#subjectsInput').type('m')
-    browser.all('.subjects-auto-complete__option').should(have.exact_texts('Chemistry', 'Computer Science', 'Commerce', 'Economics'))
+    browser.all('.subjects-auto-complete__option').should(have.exact_texts(
+        'Chemistry', 'Computer Science', 'Commerce', 'Economics'))
     browser.all('.subjects-auto-complete__option').first.click()
     browser.all('.subjects-auto-complete__multi-value').should(have.exact_texts('Maths', 'Chemistry'))
     # browser.element('#subjectsInput').type('Math').press_enter()
