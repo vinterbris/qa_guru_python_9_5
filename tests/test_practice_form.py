@@ -1,5 +1,4 @@
 from selene import browser, be, have, command
-from selenium.webdriver import Keys
 
 
 def test_registration():
@@ -43,11 +42,13 @@ def test_registration():
     browser.element('#hobbies-checkbox-1').with_(click_by_js=True).click()
     browser.element('#hobbies-checkbox-2').with_(click_by_js=True).click()
     browser.element('#hobbies-checkbox-3').with_(click_by_js=True).click()
-    # current addres
+    # current address
     browser.element('#currentAddress').should(be.blank).type('Test Address')
     browser.element('#state').perform(command.js.scroll_into_view)
     browser.element('#state').click()
-    browser.element('#react-select-3-input').type('NCR').press_enter()
+    browser.element('#react-select-3-option-0').click()
+    # browser.element('#react-select-3-input').type('NCR').press_enter()
+    browser.element('#state').should(have.text('NCR'))
     browser.element('#city').click()
     browser.element('#react-select-4-input').type('Delhi').press_enter()
     browser.element('#submit').perform(command.js.click)
