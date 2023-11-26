@@ -29,8 +29,16 @@ def test_registration():
     browser.element('#dateOfBirthInput').should(have.value("02 Jan 2100"))
     # subjects
     browser.element('#subjectsContainer').click()
-    browser.element('#subjectsInput').type('Math').press_enter()
-    browser.element('#subjectsInput').type('English').press_enter()
+    browser.element('#subjectsInput').type('m')
+    browser.all('.subjects-auto-complete__option').should(have.exact_texts('Maths', 'Chemistry', 'Computer Science', 'Commerce', 'Economics'))
+    browser.all('.subjects-auto-complete__option').first.click()
+    browser.element('#subjectsInput').type('m')
+    browser.all('.subjects-auto-complete__option').should(have.exact_texts('Chemistry', 'Computer Science', 'Commerce', 'Economics'))
+    browser.all('.subjects-auto-complete__option').first.click()
+    browser.element('#subjectsContainer').should(have.exact_texts('Maths', 'Chemistry'))
+    # browser.element('#subjectsInput').type('Math').press_enter()
+    # browser.element('#subjectsInput').type('English').press_enter()
+
     # hobbies
     browser.element('#hobbies-checkbox-1').with_(click_by_js=True).click()
     browser.element('#hobbies-checkbox-2').with_(click_by_js=True).click()
