@@ -1,3 +1,5 @@
+import os
+
 from selene import browser, be, have, command
 
 
@@ -42,11 +44,12 @@ def test_registration():
     browser.element('#hobbies-checkbox-1').with_(click_by_js=True).click()
     browser.element('#hobbies-checkbox-2').with_(click_by_js=True).click()
     browser.element('#hobbies-checkbox-3').with_(click_by_js=True).click()
+    # picture
+    browser.element("#uploadPicture").send_keys(os.path.abspath("../files/nolan.jpg"))
     # current address
     browser.element('#currentAddress').should(be.blank).type('Test Address')
     # state and city
-    browser.element('#state').perform(command.js.scroll_into_view)
-    browser.element('#state').click()
+    browser.element('#state').perform(command.js.scroll_into_view).click()
     browser.element('#react-select-3-option-0').click()
     # browser.element('#react-select-3-input').type('NCR').press_enter()
     browser.element('#city').click()
@@ -55,6 +58,5 @@ def test_registration():
     browser.element('#submit').perform(command.js.click)
     browser.all('.table>tbody>tr>td:last-child').should(have.exact_texts(
         'Sergey Dobrovolskiy', 'dobrovolskiy@qa.ru', 'Male', '1002003040', '02 January,2100', 'Maths, Chemistry',
-        'Sports, Reading, Music', '', 'Test Address', 'NCR Delhi'))
-    browser.element('#closeLargeModal').perform(command.js.scroll_into_view)
-    browser.element('#closeLargeModal').click()
+        'Sports, Reading, Music', 'nolan.jpg', 'Test Address', 'NCR Delhi'))
+    browser.element('#closeLargeModal').perform(command.js.scroll_into_view).click()
