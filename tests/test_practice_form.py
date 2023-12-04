@@ -2,7 +2,8 @@ import os
 
 from selene import browser, be, have, command
 
-CURRENT_FILE = os.path.abspath(__file__)
+import tests
+CURRENT_FILE = os.path.abspath(tests.__file__)
 CURRENT_DIR = os.path.dirname(CURRENT_FILE)
 RES_DIR = os.path.join(CURRENT_DIR, os.path.pardir, "resources")
 
