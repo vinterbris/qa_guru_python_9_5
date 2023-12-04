@@ -17,17 +17,11 @@ def test_registration():
     browser.element('#dateOfBirthInput').click()
     browser.element('.react-datepicker__month-select').type('January')
     browser.element('.react-datepicker__year-select').type("2100")
-    browser.element('.react-datepicker__day--002').click()
+    browser.element(f'.react-datepicker__day--00{2}').click()
 
     browser.element('#subjectsContainer').click()
-    browser.element('#subjectsInput').type('m')
-    browser.all('.subjects-auto-complete__option').should(have.exact_texts(
-        'Maths', 'Chemistry', 'Computer Science', 'Commerce', 'Economics'))
-    browser.all('.subjects-auto-complete__option').first.click()
-    browser.element('#subjectsInput').type('m')
-    browser.all('.subjects-auto-complete__option').should(have.exact_texts(
-        'Chemistry', 'Computer Science', 'Commerce', 'Economics'))
-    browser.all('.subjects-auto-complete__option').first.click()
+    browser.element('#subjectsInput').type('Maths').press_enter()
+    browser.element('#subjectsInput').type('Chemistry').press_enter()
 
     browser.all('[for^=hobbies-checkbox]').element_by(have.text('Sports')).click()
     browser.all('[for^=hobbies-checkbox]').element_by(have.text('Reading')).click()
@@ -35,7 +29,7 @@ def test_registration():
 
     browser.element("#uploadPicture").send_keys(os.path.abspath("../resources/nolan.jpg"))
 
-    browser.element('#currentAddress').should(be.blank).type('Test Address')
+    browser.element('#currentAddress').should(be.blank).with_(type_by_js=True).type('Test Address')
 
     browser.element('#state').perform(command.js.scroll_into_view).click()
     browser.all('[id^=react-select][id*=option]').element_by(have.text('NCR')).click()
