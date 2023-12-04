@@ -42,11 +42,15 @@ def test_registration():
     browser.all('[for^=hobbies-checkbox]').element_by(have.text('Music')).click()
 
     browser.element("#uploadPicture").send_keys(os.path.abspath("../resources/nolan.jpg"))
+
     browser.element('#currentAddress').should(be.blank).type('Test Address')
+
     browser.element('#state').perform(command.js.scroll_into_view).click()
-    browser.element('#react-select-3-option-0').click()
+    browser.all('[id^=react-select][id*=option]').element_by(have.text('NCR')).click()
+
     browser.element('#city').click()
-    browser.element('#react-select-4-option-0').click()
+    browser.all('[id^=react-select][id*=option]').element_by(have.text('Delhi')).click()
+
     browser.element('#submit').perform(command.js.click)
 
     # THEN
