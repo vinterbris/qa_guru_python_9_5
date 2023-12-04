@@ -37,9 +37,9 @@ def test_registration():
         'Chemistry', 'Computer Science', 'Commerce', 'Economics'))
     browser.all('.subjects-auto-complete__option').first.click()
 
-    browser.element('#hobbies-checkbox-1').with_(click_by_js=True).click()
-    browser.element('#hobbies-checkbox-2').with_(click_by_js=True).click()
-    browser.element('#hobbies-checkbox-3').with_(click_by_js=True).click()
+    browser.all('[for^=hobbies-checkbox]').element_by(have.text('Sports')).click()
+    browser.all('[for^=hobbies-checkbox]').element_by(have.text('Reading')).click()
+    browser.all('[for^=hobbies-checkbox]').element_by(have.text('Music')).click()
 
     browser.element("#uploadPicture").send_keys(os.path.abspath("../resources/nolan.jpg"))
     browser.element('#currentAddress').should(be.blank).type('Test Address')
