@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from selene import browser, be, have, command
 
@@ -31,7 +32,7 @@ def test_registration():
     browser.all('[for^=hobbies-checkbox]').element_by(have.text('Reading')).click()
     browser.all('[for^=hobbies-checkbox]').element_by(have.text('Music')).click()
 
-    browser.element("#uploadPicture").send_keys(os.path.abspath(os.path.join(RES_DIR, "nolan.jpg")))
+    browser.element("#uploadPicture").set_value(os.path.abspath(os.path.join(RES_DIR, "nolan.jpg")))
 
     browser.element('#currentAddress').should(be.blank).with_(type_by_js=True).type('Test Address')
 
@@ -44,7 +45,6 @@ def test_registration():
     browser.element('#submit').perform(command.js.click)
 
     # THEN
-    browser.all('.table>tbody>tr>td:last-child').should(have.exact_texts(
-        'Sergey Dobrovolskiy', 'dobrovolskiy@qa.ru', 'Male', '1002003040', '02 January,2100', 'Maths, Chemistry',
+    browser.element('.table').all('td:last-child').should(have.exact_texts('Sergey Dobrovolskiy', 'dobrovolskiy@qa.ru', 'Male', '1002003040', '02 January,2100', 'Maths, Chemistry',
         'Sports, Reading, Music', 'nolan.jpg', 'Test Address', 'NCR Delhi'))
     browser.element('#closeLargeModal').perform(command.js.scroll_into_view).click()
