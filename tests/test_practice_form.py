@@ -45,7 +45,7 @@ def test_registration():
     browser.element('#hobbies-checkbox-2').with_(click_by_js=True).click()
     browser.element('#hobbies-checkbox-3').with_(click_by_js=True).click()
     # picture
-    browser.element("#uploadPicture").send_keys(os.path.abspath("../files/nolan.jpg"))
+    browser.element("#uploadPicture").send_keys(os.path.abspath("../resources/nolan.jpg"))
     # current address
     browser.element('#currentAddress').should(be.blank).type('Test Address')
     # state and city
