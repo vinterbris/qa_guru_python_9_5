@@ -1,12 +1,13 @@
 import os
-from pathlib import Path
 
 from selene import browser, be, have, command
 
 import tests
+
 CURRENT_FILE = os.path.abspath(tests.__file__)
 CURRENT_DIR = os.path.dirname(CURRENT_FILE)
 RES_DIR = os.path.join(CURRENT_DIR, os.path.pardir, "resources")
+
 
 def test_registration():
     browser.open('/automation-practice-form')
@@ -45,6 +46,8 @@ def test_registration():
     browser.element('#submit').perform(command.js.click)
 
     # THEN
-    browser.element('.table').all('td:last-child').should(have.exact_texts('Sergey Dobrovolskiy', 'dobrovolskiy@qa.ru', 'Male', '1002003040', '02 January,2100', 'Maths, Chemistry',
-        'Sports, Reading, Music', 'nolan.jpg', 'Test Address', 'NCR Delhi'))
+    browser.element('.table').all('td:last-child').should(
+        have.exact_texts('Sergey Dobrovolskiy', 'dobrovolskiy@qa.ru', 'Male', '1002003040', '02 January,2100',
+                         'Maths, Chemistry',
+                         'Sports, Reading, Music', 'nolan.jpg', 'Test Address', 'NCR Delhi'))
     browser.element('#closeLargeModal').perform(command.js.scroll_into_view).click()
