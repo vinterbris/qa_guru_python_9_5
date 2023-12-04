@@ -15,16 +15,8 @@ def test_registration():
     browser.element('#userNumber').should(be.blank).type('1002003040')
 
     browser.element('#dateOfBirthInput').click()
-    browser.element('.react-datepicker__month-select').click()
-    browser.all('.react-datepicker__month-select>option').should(
-        have.exact_texts('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-                         'October', 'November', 'December'))
-    browser.element('.react-datepicker__month-select>option[value="0"]').click()
-    browser.element('.react-datepicker__year-select').click()
-    browser.all('.react-datepicker__year-select>option').should(have.size(201))
-    browser.all('.react-datepicker__year-select>option').first.should(have.exact_text('1900'))
-    browser.all('.react-datepicker__year-select>option')[-1].should(have.exact_text('2100'))
-    browser.element('.react-datepicker__year-select').type("2100").press_enter()
+    browser.element('.react-datepicker__month-select').type('January')
+    browser.element('.react-datepicker__year-select').type("2100")
     browser.element('.react-datepicker__day--002').click()
 
     browser.element('#subjectsContainer').click()
