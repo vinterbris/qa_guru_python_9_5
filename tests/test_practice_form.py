@@ -2,6 +2,9 @@ import os
 
 from selene import browser, be, have, command
 
+CURRENT_FILE = os.path.abspath(__file__)
+CURRENT_DIR = os.path.dirname(CURRENT_FILE)
+RES_DIR = os.path.join(CURRENT_DIR, os.path.pardir, "resources")
 
 def test_registration():
     browser.open('/automation-practice-form')
@@ -27,7 +30,7 @@ def test_registration():
     browser.all('[for^=hobbies-checkbox]').element_by(have.text('Reading')).click()
     browser.all('[for^=hobbies-checkbox]').element_by(have.text('Music')).click()
 
-    browser.element("#uploadPicture").send_keys(os.path.abspath("../resources/nolan.jpg"))
+    browser.element("#uploadPicture").send_keys(os.path.abspath(os.path.join(RES_DIR, "nolan.jpg")))
 
     browser.element('#currentAddress').should(be.blank).with_(type_by_js=True).type('Test Address')
 
