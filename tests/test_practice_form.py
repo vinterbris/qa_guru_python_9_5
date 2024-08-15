@@ -16,7 +16,6 @@ def test_registration():
     browser.element('#firstName').should(be.blank).with_(type_by_js=True).type('Sergey')
     browser.element('#lastName').should(be.blank).with_(type_by_js=True).type('Dobrovolskiy')
     browser.element('#userEmail').should(be.blank).with_(type_by_js=True).type('dobrovolskiy@qa.ru')
-    # browser.element('[name=gender][value=Male]').with_(click_by_js=True).click()
     browser.all('[name=gender]').element_by(have.value('Male')).element('..').click()
     browser.element('#userNumber').should(be.blank).with_(type_by_js=True).type('1002003040')
 
